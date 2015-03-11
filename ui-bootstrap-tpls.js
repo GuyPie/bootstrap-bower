@@ -3823,7 +3823,7 @@ angular.module('ui.bootstrap.typeahead', ['ui.bootstrap.position', 'ui.bootstrap
             resetMatches();
             scope.$digest();
           }
-      	});
+      	}, 200);
       };
 
       $document.bind('click', dismissClickHandler);
