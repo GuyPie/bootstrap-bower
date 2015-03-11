@@ -3811,17 +3811,19 @@ angular.module('ui.bootstrap.typeahead', ['ui.bootstrap.position', 'ui.bootstrap
 
       // Keep reference to click handler to unbind it.
       var dismissClickHandler = function (evt) {
-        // Proposed patch: select the clicked item(only if clicking on the typeahead dropdown)
-        if (evt.target.parentElement && evt.target.parentElement.id.indexOf("typeahead") != -1) {
-          scope.$apply(function () {
-            if (scope.activeIdx != -1) {
-              scope.select(scope.activeIdx);
-            }
-          });
+      	$timeout(function() {
+      	  // Proposed patch: select the clicked item(only if clicking on the typeahead dropdown)
+          if (evt.target.parentElement && evt.target.parentElement.id.indexOf("typeahead") != -1) {
+            scope.$apply(function () {
+              if (scope.activeIdx != -1) {
+                scope.select(scope.activeIdx);
+              }
+            });
           
-          resetMatches();
-          scope.$digest();
-        }
+            resetMatches();
+            scope.$digest();
+          }
+      	});
       };
 
       $document.bind('click', dismissClickHandler);
