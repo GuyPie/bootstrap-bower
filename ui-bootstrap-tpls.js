@@ -3778,9 +3778,16 @@ angular.module('ui.bootstrap.typeahead', ['ui.bootstrap.position', 'ui.bootstrap
         }
 
         // if there's nothing selected (i.e. focusFirst) and enter is hit, don't do anything
-        if (scope.activeIdx == -1 && (evt.which === 13 || evt.which === 9)) {
-          return;
-        }
+        if (scope.activeIdx == -1 && evt.which === 13) {
++          return;
++        }
++
++        // if there's nothing selected (i.e. focusFirst) and tab is hit, clear the results
++        if (scope.activeIdx == -1 && evt.which === 9) {
++          resetMatches();
++          scope.$digest();
+           return;
+         }
 
         evt.preventDefault();
 
